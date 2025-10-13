@@ -169,6 +169,9 @@
   }
 }
 @layer utilities {
+  .static {
+    position: static;
+  }
   .col-span-3 {
     grid-column: span 3 / span 3;
   }
@@ -177,6 +180,9 @@
   }
   .mt-10 {
     margin-top: calc(var(--spacing) * 10);
+  }
+  .contents {
+    display: contents;
   }
   .flex {
     display: flex;
