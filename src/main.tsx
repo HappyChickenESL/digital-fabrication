@@ -11,15 +11,18 @@ import {
 import Navbar from "./components/layout/Navbar.tsx";
 import About from "./components/About.tsx";
 import FinalProjectIdea from "./components/FinalProjectIdea.tsx";
+import AssignmentTwo from "./components/assignments/week-two/AssignmentTwo.tsx";
 
 const rootRoute = createRootRoute({
   component: () => (
-    <div className="grid grid-cols-5 bg-black text-white h-[100vh]">
-      <div className="col-span-1 h-full">
+    <div className="flex w-full bg-black text-white h-[100vh] font-mono">
+      <div className="min-w-[20rem]">
         <Navbar></Navbar>
       </div>
-      <div className="col-span-4 h-full p-4">
-        <Outlet></Outlet>
+      <div>
+        <div className="p-4">
+          <Outlet></Outlet>
+        </div>
       </div>
     </div>
   ),
@@ -45,13 +48,20 @@ const finalIdeaRoute = createRoute({
   component: () => <FinalProjectIdea></FinalProjectIdea>,
 });
 
+const assignmentTwoRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/assignments/two",
+  component: () => <AssignmentTwo></AssignmentTwo>,
+});
+
 const routeTree = rootRoute.addChildren([
   aboutRoute,
   homeRoute,
   finalIdeaRoute,
+  assignmentTwoRoute,
 ]);
 
-const router = createRouter({ routeTree });
+export const router = createRouter({ routeTree });
 
 declare module "@tanstack/react-router" {
   interface Register {

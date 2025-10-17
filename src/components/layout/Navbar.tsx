@@ -1,20 +1,56 @@
 import { Link } from "@tanstack/react-router";
 import { Drill } from "lucide-react";
+import { useState } from "react";
+import { router } from "../../main";
+
+const routes: {
+  url: string;
+  name: string;
+}[] = [
+  {
+    name: "About Me",
+    url: "/about",
+  },
+  {
+    name: "Final Project Idea",
+    url: "/final",
+  },
+  {
+    name: "Assignment Two",
+    url: "/assignments/two",
+  },
+];
 
 export default function Navbar() {
+  const [url, setUrl] = useState<string | null>(null);
+
+  router.subscribe("onResolved", () => {
+    setUrl(router.latestLocation.href);
+  });
+
   return (
-    <div className="border-r-2 text-center h-full sticky p-4">
-      <div className="flex flex-row justify-center space-x-3 mb-4">
-        <Link to="/" className="text-2xl">
-          Digitale Fertigung
-        </Link>{" "}
-        <Drill size={34}></Drill>{" "}
+    <div className="border-r-2 border-white text-center h-full sticky p-4">
+      <div className="flex flex-row justify-center mb-12">
+        <Link to="/" className="flex flex-col space-x-3 justify-center">
+          <div className="mx-auto mb-2">
+            <Drill className="text-teal-400" size={34}></Drill>
+          </div>
+          <div className="text-teal-400 text-2xl font-extrabold">
+            Digital Fabrication
+          </div>
+        </Link>
       </div>
-      <div>
-        <Link to="/about">About me</Link>
-      </div>
-      <div>
-        <Link to="/final">Final Project Idea</Link>
+      <div className="[&>*>a]:text-lg [&>*>a]:hover:underline">
+        {routes.map((item) => (
+          <div>
+            <Link
+              className={url === item.url ? "text-teal-400" : ""}
+              to={item.url}
+            >
+              {item.name}
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );
