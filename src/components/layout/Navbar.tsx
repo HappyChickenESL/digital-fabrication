@@ -41,8 +41,8 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="[&>*>a]:text-lg [&>*>a]:hover:underline">
-        {routes.map((item) => (
-          <div>
+        {routes.map((item, index) => (
+          <div key={index}>
             <Link
               className={url === item.url ? "text-primary" : ""}
               to={item.url}

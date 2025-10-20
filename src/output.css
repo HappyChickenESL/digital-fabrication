@@ -16,6 +16,10 @@
     --text-xl--line-height: calc(1.75 / 1.25);
     --text-2xl: 1.5rem;
     --text-2xl--line-height: calc(2 / 1.5);
+    --text-3xl: 1.875rem;
+    --text-3xl--line-height: calc(2.25 / 1.875);
+    --text-5xl: 3rem;
+    --text-5xl--line-height: 1;
     --font-weight-extrabold: 800;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
@@ -183,6 +187,12 @@
   .mx-auto {
     margin-inline: auto;
   }
+  .\!mt-0 {
+    margin-top: calc(var(--spacing) * 0) !important;
+  }
+  .mt-0 {
+    margin-top: calc(var(--spacing) * 0);
+  }
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
   }
@@ -191,6 +201,9 @@
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
+  }
+  .mb-8 {
+    margin-bottom: calc(var(--spacing) * 8);
   }
   .mb-12 {
     margin-bottom: calc(var(--spacing) * 12);
@@ -213,9 +226,6 @@
   .min-h-screen {
     min-height: 100vh;
   }
-  .w-\[20rem\] {
-    width: 20rem;
-  }
   .w-\[40rem\] {
     width: 40rem;
   }
@@ -224,6 +234,9 @@
   }
   .w-\[100vw\] {
     width: 100vw;
+  }
+  .w-fit {
+    width: fit-content;
   }
   .w-full {
     width: 100%;
@@ -293,6 +306,14 @@
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
   }
+  .text-3xl {
+    font-size: var(--text-3xl);
+    line-height: var(--tw-leading, var(--text-3xl--line-height));
+  }
+  .text-5xl {
+    font-size: var(--text-5xl);
+    line-height: var(--tw-leading, var(--text-5xl--line-height));
+  }
   .font-extrabold {
     --tw-font-weight: var(--font-weight-extrabold);
     font-weight: var(--font-weight-extrabold);
@@ -326,24 +347,27 @@
     }
   }
 }
-a {
-  &:hover {
-    @media (hover: hover) {
-      color: var(--color-primary);
+@layer base {
+  a {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-primary);
+      }
     }
   }
-}
-h1 {
-  font-size: var(--text-xl);
-  line-height: var(--tw-leading, var(--text-xl--line-height));
-  color: var(--color-primary);
-}
-html {
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-img {
-  padding-block: calc(var(--spacing) * 2);
+  h1 {
+    margin-top: calc(var(--spacing) * 4);
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
+    color: var(--color-primary);
+  }
+  html {
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  img {
+    padding-block: calc(var(--spacing) * 2);
+  }
 }
 @property --tw-space-x-reverse {
   syntax: "*";

@@ -1,12 +1,15 @@
 export default function AssignmentTwo() {
   return (
     <div>
-      <h1>=====Fusion Archive File=====</h1>
-      <a href="./../../../../files/week-two/7-segment-display-colorized.f3d">
-        Download fusion file
+      <h1 className="mt-0">=====Fusion Archive File=====</h1>
+      <a
+        className="text-3xl"
+        href="./../../../../files/week-two/7-segment-display-colorized.f3d"
+      >
+        Download Fusion Archive File
       </a>
-      <h1>=============================</h1>
-      <h1>The Case</h1>
+      <h1 className="mt-0 mb-8">=============================</h1>
+      <h1>1. The Case</h1>
       <div>
         I had a rough idea of what I want my final idea to look like. I started
         to tinker a bit using fusion and these are the steps I did:
@@ -68,7 +71,7 @@ export default function AssignmentTwo() {
           <img src="./../../../../files/week-two/part-one-complete.png"></img>
         </div>
       </div>
-      <h1 className="mt-4">The LED Board</h1>
+      <h1>2. The LED Board</h1>
       <div>
         I created another box, that has the same length and width of the first
         box. I then prototyped an example stripped LED strip
@@ -87,7 +90,7 @@ export default function AssignmentTwo() {
           <img src="./../../../../files/week-two/LED-board.png"></img>
         </div>
       </div>
-      <h1>Final Prototype</h1>
+      <h1>3. Final Prototype</h1>
       <div>
         After combining all pieces, I added a wood style to the prototype and
         this is what I ended up with:
