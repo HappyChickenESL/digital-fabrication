@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./input.css";
 import {
+  createHashHistory,
   createRootRoute,
   createRoute,
   createRouter,
@@ -61,7 +62,9 @@ const routeTree = rootRoute.addChildren([
   assignmentTwoRoute,
 ]);
 
-export const router = createRouter({ routeTree });
+const history = createHashHistory();
+
+export const router = createRouter({ routeTree, history });
 
 declare module "@tanstack/react-router" {
   interface Register {
