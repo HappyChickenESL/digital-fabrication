@@ -2,7 +2,7 @@ export default function FinalProjectIdea() {
   return (
     <div className="max-w-[60rem]">
       <div>
-        <div className="text-xl  text-teal-400">1. Basic Idea</div>
+        <h1>1. Basic Idea</h1>
         My project idea is a board with multiple 7-segment LED digits. This idea
         came to my mind because I always liked to show statistics and having a
         display which even a few digits can be really cool. The first "simpler"
@@ -11,7 +11,7 @@ export default function FinalProjectIdea() {
         LED strip behind them.
       </div>
       <div className="mt-4">
-        <div className="text-xl  text-teal-400">2. More Advanced Idea</div>
+        <h1>2. More Advanced Idea</h1>
         In addition to the basic idea, a potentiometer would be cool to
         increase/ decrease the brightness of the LEDs. An alternative to this
         could be a custom user interface like an app on the smartphone which can
@@ -23,7 +23,7 @@ export default function FinalProjectIdea() {
         seperately or at least of each digit.
       </div>
       <div className="mt-4">
-        <div className="text-xl text-teal-400 z-10">3. The Ultimate Goal</div>
+        <h1>3. The Ultimate Goal</h1>
         The final idea is a 4x2 digit display, that lets you customize anything
         you want via the app/ website. You can turn each segment on/ off
         individually, change the color and the hue. Potentially even with an

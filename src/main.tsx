@@ -15,12 +15,12 @@ import AssignmentTwo from "./components/assignments/week-two/AssignmentTwo.tsx";
 
 const rootRoute = createRootRoute({
   component: () => (
-    <div className="flex w-full bg-black text-white h-[100vh] font-mono">
+    <div className="flex w-full bg-black text-white min-h-screen font-mono">
       <div className="min-w-[20rem]">
         <Navbar></Navbar>
       </div>
       <div>
-        <div className="p-4">
+        <div className="p-4 w-[70%]">
           <Outlet></Outlet>
         </div>
       </div>

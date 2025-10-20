@@ -29,13 +29,13 @@ export default function Navbar() {
   });
 
   return (
-    <div className="border-r-2 border-white text-center h-full sticky p-4">
+    <div className="border-r-2 border-white text-center h-screen sticky top-0 p-4">
       <div className="flex flex-row justify-center mb-12">
         <Link to="/" className="flex flex-col space-x-3 justify-center">
           <div className="mx-auto mb-2">
-            <Drill className="text-teal-400" size={34}></Drill>
+            <Drill className="text-primary" size={34}></Drill>
           </div>
-          <div className="text-teal-400 text-2xl font-extrabold">
+          <div className="text-primary text-2xl font-extrabold">
             Digital Fabrication
           </div>
         </Link>
@@ -44,7 +44,7 @@ export default function Navbar() {
         {routes.map((item) => (
           <div>
             <Link
-              className={url === item.url ? "text-teal-400" : ""}
+              className={url === item.url ? "text-primary" : ""}
               to={item.url}
             >
               {item.name}

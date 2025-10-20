@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: oklch(77.7% 0.152 181.912);
+}
+
+a {
+  @apply hover:text-primary
+}
+
+h1 {
+  @apply text-xl text-primary
+}
+
+html {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+img {
+  @apply py-2
+}
