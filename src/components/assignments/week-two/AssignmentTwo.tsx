@@ -2,10 +2,7 @@ export default function AssignmentTwo() {
   return (
     <div>
       <h1 className="mt-0">=====Fusion Archive File=====</h1>
-      <a
-        className="text-3xl"
-        href="/public/week-two/7-segment-display-colorized.f3d"
-      >
+      <a className="text-3xl" href="/week-two/7-segment-display-colorized.f3d">
         Download Fusion Archive File
       </a>
       <h1 className="mt-0 mb-8">=============================</h1>
@@ -18,7 +15,7 @@ export default function AssignmentTwo() {
         First, I created two boxes. One for the whole display and the other
         which I would use to cut out the inside of the box
       </div>
-      <img src="/public/week-two/plane.png"></img>
+      <img src="/week-two/plane.png"></img>
       <div>
         After that, I created a 2d sketch with the 7 segments of the digit. To
         achieve this I drew simple lines with the end connecting to the start. I
@@ -26,11 +23,11 @@ export default function AssignmentTwo() {
       </div>
       <div className="flex flex-row space-x-2">
         <div>
-          <img src="/public/week-two/segment-sketch.png"></img>
+          <img src="/week-two/segment-sketch.png"></img>
         </div>
         <div className="flex items-center">
           <img
-            src="/public/week-two/segments-extruded.png"
+            src="/week-two/segments-extruded.png"
             className="w-[40rem]"
           ></img>
         </div>
@@ -42,7 +39,7 @@ export default function AssignmentTwo() {
       </div>
       <div className="flex flex-row space-x-2">
         <div>
-          <img src="/public/week-two/full-cutout-body.png"></img>
+          <img src="/week-two/full-cutout-body.png"></img>
         </div>
       </div>
       <div>
@@ -59,7 +56,7 @@ export default function AssignmentTwo() {
       </div>
       <div className="flex flex-row space-x-2">
         <div>
-          <img src="/public/week-two/digit-walls.png"></img>
+          <img src="/week-two/digit-walls.png"></img>
         </div>
       </div>
       <div>
@@ -68,7 +65,7 @@ export default function AssignmentTwo() {
       </div>
       <div className="flex flex-row space-x-2">
         <div>
-          <img src="/public/week-two/part-one-complete.png"></img>
+          <img src="/week-two/part-one-complete.png"></img>
         </div>
       </div>
       <h1>2. The LED Board</h1>
@@ -78,7 +75,7 @@ export default function AssignmentTwo() {
       </div>
       <div className="flex flex-row space-x-2">
         <div>
-          <img src="/public/week-two/LED-part.png"></img>
+          <img src="/week-two/LED-part.png"></img>
         </div>
       </div>
       <div>
@@ -87,7 +84,7 @@ export default function AssignmentTwo() {
       </div>
       <div className="flex flex-row space-x-2">
         <div>
-          <img src="/public/week-two/LED-board.png"></img>
+          <img src="/week-two/LED-board.png"></img>
         </div>
       </div>
       <h1>3. Final Prototype</h1>
