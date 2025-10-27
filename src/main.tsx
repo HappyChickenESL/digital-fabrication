@@ -13,6 +13,7 @@ import Navbar from "./components/layout/Navbar.tsx";
 import About from "./components/About.tsx";
 import FinalProjectIdea from "./components/FinalProjectIdea.tsx";
 import AssignmentTwo from "./components/assignments/week-two/AssignmentTwo.tsx";
+import AssigmentThree from "./components/assignments/week-three/AssignmentThree.tsx";
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -55,11 +56,18 @@ const assignmentTwoRoute = createRoute({
   component: () => <AssignmentTwo></AssignmentTwo>,
 });
 
+const assignmentThreeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/assignments/three",
+  component: () => <AssigmentThree></AssigmentThree>,
+});
+
 const routeTree = rootRoute.addChildren([
   aboutRoute,
   homeRoute,
   finalIdeaRoute,
   assignmentTwoRoute,
+  assignmentThreeRoute,
 ]);
 
 const history = createHashHistory();
