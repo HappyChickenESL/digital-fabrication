@@ -187,9 +187,6 @@
   .mx-auto {
     margin-inline: auto;
   }
-  .\!mt-0 {
-    margin-top: calc(var(--spacing) * 0) !important;
-  }
   .mt-0 {
     margin-top: calc(var(--spacing) * 0);
   }
@@ -207,6 +204,9 @@
   }
   .mb-12 {
     margin-bottom: calc(var(--spacing) * 12);
+  }
+  .block {
+    display: block;
   }
   .contents {
     display: contents;
@@ -234,9 +234,6 @@
   }
   .w-\[100vw\] {
     width: 100vw;
-  }
-  .w-fit {
-    width: fit-content;
   }
   .w-full {
     width: 100%;
@@ -309,10 +306,6 @@
   .text-3xl {
     font-size: var(--text-3xl);
     line-height: var(--tw-leading, var(--text-3xl--line-height));
-  }
-  .text-5xl {
-    font-size: var(--text-5xl);
-    line-height: var(--tw-leading, var(--text-5xl--line-height));
   }
   .font-extrabold {
     --tw-font-weight: var(--font-weight-extrabold);
