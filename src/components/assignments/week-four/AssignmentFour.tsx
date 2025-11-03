@@ -12,12 +12,11 @@ export default function AssigmentFour() {
       </div>
       <h1>Measurements</h1>
       <div>
+        these are the measurements of a standard 250ml redbull can
         <ul>
           <li>Diameter: 66mm</li>
           <li>height: 122mm</li>
         </ul>
-        However, I want to offset the walls a bit so I can make sure that she
-        can fits for sure. Because of this,
       </div>
       <h1>Parts</h1>
       <div>
