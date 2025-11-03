@@ -23,6 +23,10 @@ const routes: {
     name: "Assignment Three",
     url: "/assignments/three",
   },
+  {
+    name: "Assignment Four",
+    url: "/assignments/four",
+  },
 ];
 
 export default function Navbar() {
