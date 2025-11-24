@@ -17,6 +17,7 @@ import AssigmentThree from "./components/assignments/week-three/AssignmentThree.
 import AssigmentFour from "./components/assignments/week-four/AssignmentFour.tsx";
 import AssigmentFive from "./components/assignments/week-five/AssignmentFive.tsx";
 import AssignmentSix from "./components/assignments/week-six/AssignmentSix.tsx";
+import AssignmentSeven from "./components/assignments/week-seven/AssignmentSeven.tsx";
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -83,6 +84,12 @@ const assignmentSixRoute = createRoute({
   component: () => <AssignmentSix></AssignmentSix>,
 });
 
+const assignmentSevenRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/assignments/seven",
+  component: () => <AssignmentSeven />,
+});
+
 const routeTree = rootRoute.addChildren([
   aboutRoute,
   homeRoute,
@@ -92,6 +99,7 @@ const routeTree = rootRoute.addChildren([
   assignmentFourRoute,
   assignmentFiveRoute,
   assignmentSixRoute,
+  assignmentSevenRoute,
 ]);
 
 const history = createHashHistory();
