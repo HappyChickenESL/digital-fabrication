@@ -76,8 +76,113 @@ void loop() {
         To debounce the time, I added a while-loop which would stop the loop
         from triggering again until the Power isnt HIGH anymore.
       </div>
-      <h1>Task 2: Game</h1>
-      <div>Nothing here yet</div>
+      <h1>Task 2: Reaction Game</h1>
+      <div className="my-4">
+        Link:{" "}
+        <a href="https://www.tinkercad.com/things/k1TyF1kNpbJ-reaction-game?sharecode=aXYMrAmq1JzaXsNHwumHRoP600hUnk8uJF4NibGk0E8">
+          Tinkercad - Reaction Game
+        </a>
+      </div>
+      <img src="/week-six/exercise-two.png"></img>
+      <div>
+        My game idea was a reaction game. You have 2 LEDs with 2 buttons and
+        have to press the correct button within a certain time period. As you
+        succeed, the game becomes harder by decreasing the amount of time you
+        have to press the correct button until you lose. I used 2 LEDs and 2
+        buttons with pull down resistors. This is my code:
+      </div>
+      <div className="w-fit">
+        <SyntaxHighlighter language="cpp" style={vscDarkPlus}>
+          {`
+int LED1 = 8;
+int LED2 = 9;
+int BUTTON1 = 2;
+int BUTTON2 = 3;
+
+int timeToAnswer = 2000;
+int activeLED = 0;
+
+void setup() {
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(BUTTON1, INPUT);
+  pinMode(BUTTON2, INPUT);
+  
+  randomSeed(analogRead(0));
+}
+
+void loop() {
+  digitalWrite(LED1, LOW);
+  digitalWrite(LED2, LOW);
+  
+  activeLED = random(1, 3);
+  
+  if (activeLED == 1) {
+    digitalWrite(LED1, HIGH);
+  } else {
+    digitalWrite(LED2, HIGH);
+  }
+
+  int startTime = millis();
+  bool answered = false;
+
+  while (millis() - startTime < timeToAnswer) {
+    
+    if (digitalRead(BUTTON1) == HIGH) {
+      while(digitalRead(BUTTON1) == HIGH) {
+    }
+      checkAnswer(1);
+      answered = true;
+      break;
+    }
+    
+    if (digitalRead(BUTTON2) == HIGH) {
+      while(digitalRead(BUTTON2) == HIGH) {
+    }
+      checkAnswer(2);
+      answered = true;
+      break;
+    }
+  }
+
+  if (!answered) {
+    gameOver();
+  }
+
+  delay(500);
+}
+
+void checkAnswer(int buttonPressed) {
+  if (buttonPressed == activeLED) {
+    timeToAnswer = timeToAnswer * 0.9;
+    
+    digitalWrite(LED1, HIGH);
+    digitalWrite(LED2, HIGH);
+    delay(200);
+    digitalWrite(LED1, LOW);
+    digitalWrite(LED2, LOW);
+    
+  } else {
+    gameOver();
+  }
+}
+
+void gameOver() {
+  for (int i = 0; i < 5; i++) {
+    digitalWrite(LED1, HIGH);
+    digitalWrite(LED2, HIGH);
+    delay(150);
+    digitalWrite(LED1, LOW);
+    digitalWrite(LED2, LOW);
+    delay(150);
+  }
+  
+  timeToAnswer = 2000;
+}
+
+          `}
+        </SyntaxHighlighter>
+      </div>
       <h1>Task 3: Final Project</h1>
       <div className="my-4">
         Link:{" "}

@@ -4,6 +4,11 @@ export default function AssigmentFour() {
       <h1 className="mt-0">=============================</h1>
       <div className="text-3xl">Lasercutting</div>
       <h1 className="mt-0 mb-8">=============================</h1>
+      <h1 className="mt-0">=====Fusion Archive File=====</h1>
+      <a className="text-3xl" href="/week-four/car-cupholder.f3d">
+        Download Fusion Archive File
+      </a>
+      <h1 className="mt-0 mb-8">=============================</h1>
       <h1>Idea</h1>
       <div>
         My idea is to create a cup holder for my car, since my car doesnt have
@@ -113,6 +118,17 @@ export default function AssigmentFour() {
       <img src="/week-four/base-with-tower.jpg"></img>
       <img src="/week-four/wall-long.jpg"></img>
       <img src="/week-four/bended.jpg"></img>
+      <h1>Learning</h1>
+      <div>
+        Sadly my idea did not work because of two reasons. First, the joints
+        weren't strong enough to support the whole body. I was able to fit them
+        into the holes with some pressure. I think the fit was really okay but
+        the way I built the joints, they were meant to break. The second problem
+        was, that when sticking the joints together, the flexible wall
+        semi-ripped. Leaving me with this uneven structure which can be seen in
+        the last image. I ended up really liking the idea, however I had to
+        rethink the joints in order to make this possible.
+      </div>
     </div>
   );
 }

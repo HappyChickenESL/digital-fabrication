@@ -39,6 +39,14 @@ const routes: {
     name: "Assignment Seven",
     url: "/assignments/seven",
   },
+  {
+    name: "Assignment Eight",
+    url: "/assignments/eight",
+  },
+  {
+    name: "Final Project: Seven Segment",
+    url: "/seven-segment",
+  },
 ];
 
 export default function Navbar() {

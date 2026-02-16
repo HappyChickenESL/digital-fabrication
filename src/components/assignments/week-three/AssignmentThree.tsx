@@ -23,16 +23,18 @@ export default function AssigmentThree() {
       </div>
       <h1>Exercise</h1>
       <div>
-        I hadnt come up with something cool that I wanted to print, therefore I
-        will think about this more and come up with another idea.
+        I printed my fusion design from
+        <Link to="/assignments/two"> Last Week</Link> in a smaller scale. There
+        are a handful of reasons why doing this using 3d-printing is beneficial.
+        First of all, subtractive methods would waste a lot of material. I
+        essentially only have a "box" with thin walls, which meant that all the
+        material in the middle would be wasted. Furthermore, getting sharp
+        corners is really hard with methods like milling, you usually end up
+        getting rounded corners. If I also added a base to my 3d print, this
+        would be completely impossible with subtractive methods as I would have
+        to carve out the insides which isnt possible with standard tools.
       </div>
-      <div>
-        As of now I, I printed my fusion design from
-        <Link to="/assignments/two"> Last Week</Link> in a smaller scale. I
-        think it serves the purposes at least a bit because subtractive methods
-        would waste a lot of resources in this case. These are the steps I
-        followed:
-      </div>
+      <div className="mt-4"> These are the steps I followed:</div>
       <h1>Importing in Bambu Studio</h1>
       <div>
         The designs need to be converted to instructions that are readable for
@@ -60,6 +62,8 @@ export default function AssigmentThree() {
         these are the results of bambu studio, which I used to print
         <img src="/week-three/slicer.png"></img>
       </div>
+      <h1>Result</h1>
+      <img src="/week-three/result.png"></img>
     </div>
   );
 }

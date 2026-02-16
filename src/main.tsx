@@ -18,6 +18,8 @@ import AssigmentFour from "./components/assignments/week-four/AssignmentFour.tsx
 import AssigmentFive from "./components/assignments/week-five/AssignmentFive.tsx";
 import AssignmentSix from "./components/assignments/week-six/AssignmentSix.tsx";
 import AssignmentSeven from "./components/assignments/week-seven/AssignmentSeven.tsx";
+import AssignmentEight from "./components/assignments/week-eight/AssignmentEight.tsx";
+import FinalProject from "./components/FinalProject.tsx";
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -90,6 +92,18 @@ const assignmentSevenRoute = createRoute({
   component: () => <AssignmentSeven />,
 });
 
+const assignmentEightRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/assignments/eight",
+  component: () => <AssignmentEight />,
+});
+
+const sevenSegmentRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/seven-segment",
+  component: () => <FinalProject />,
+});
+
 const routeTree = rootRoute.addChildren([
   aboutRoute,
   homeRoute,
@@ -100,6 +114,8 @@ const routeTree = rootRoute.addChildren([
   assignmentFiveRoute,
   assignmentSixRoute,
   assignmentSevenRoute,
+  assignmentEightRoute,
+  sevenSegmentRoute,
 ]);
 
 const history = createHashHistory();
@@ -115,5 +131,5 @@ declare module "@tanstack/react-router" {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>
+  </StrictMode>,
 );

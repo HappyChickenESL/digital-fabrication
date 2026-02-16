@@ -1,0 +1,324 @@
+import { Link } from "@tanstack/react-router";
+
+export default function FinalProject() {
+  return (
+    <div className="w-[50vw]">
+      <h1 className="mt-0!">=============================</h1>
+      <div className="text-3xl">Final Project</div>
+      <h1 className="mt-0!">=============================</h1>
+      <div>
+        <a href="/final/digital-fabrication-final-presentation.pdf">
+          Presentation
+        </a>
+      </div>
+      <div>
+        In this section I will be talking about my final project, the
+        seven-segment display.
+      </div>
+      <h1>1. The Idea</h1>
+      <div>
+        The Idea behind the project was a video I had seen some time ago about a
+        digital clock which was made out of wood using seven-segment displays
+        and could be controlled via a mobile app. I knew right from the start,
+        that I wanted to make something useful, this also being the reason why I
+        chose this class. I do a lot of gaming and recently decorated my room,
+        which I really enjoyed and I knew that a digital clock/ acontrollable
+        seven-segment display was the perfect addition. It is a rather simple
+        project that involves a decent amount of programming and electronics
+        design but since im not too creative, I also would not need to design
+        too much. My main inspiration came from this{" "}
+        <a
+          className="underline"
+          href="https://youtu.be/1aNHF5tcTpw?si=0RXDoAz9Q_0u__xe"
+        >
+          Youtube Video
+        </a>
+        , alongside many others.
+      </div>
+      <div className="mt-4">
+        So the idea was clear:
+        <ol>
+          <li>
+            1. I wanted to make a display with at least one seven-segment but
+            preferably 4
+          </li>
+          <li>2. It should be out of wood, wood-ish material</li>
+          <li>
+            3. The clock should automatically fetch the current time from the
+            internet and display it on boot
+          </li>
+          <li>
+            4. I want to be able to communicate to the LEDs via a website which
+            is hosted locally and change the color and time manually over an
+            interface.
+          </li>
+          <li></li>
+        </ol>
+      </div>
+      <h1>2. First Steps/ Design Choices</h1>
+      <div>
+        First, I had to figure out how to always have the current time on the
+        board and how to communicate to it over wifi/ bluetooth etc.. I ended up
+        doing a lot of research and these are the results, which I found out for
+        the clock.
+      </div>
+      <h2>The Clock</h2>
+      <div>I had two options here, these being:</div>
+      <ol>
+        <li>
+          1. RTC (Real-Time Clock) Module: This module has a battery, which lets
+          it always keep track of the current time, but there might be a minute
+          or two of error over the course of each year.
+        </li>
+        <li>
+          2. WiFi Module: A WiFi Module can talk to the internet using a NTP
+          Client. NTP is the Network Time Protocol, which is used all over the
+          internet to sync times.
+        </li>
+      </ol>
+      <div>
+        At this point it was already clear to me that the Wifi module is the
+        perfect fit, since I would also need this for my app later on. This
+        would however be harder, because its less plug-and-play like the RTC
+        module. I need to program the board first and wire it up correctly with
+        other challenges, which I will talk about later.
+      </div>
+      <h2>WiFi Module</h2>
+      <div>
+        There was not really any design choice being left here. I already relied
+        on this for the clock so this was a no brainer. Many modern arduino
+        boards/ similar already have a built-in wifi module, which makes it a
+        lot easier. However this course was about making everything ourselves,
+        which is why I had to connect it myself. I will talk more about this
+        later on.
+      </div>
+      <h2>LED Strip</h2>
+      <div>
+        The other part I needed for my project was a LED strip. I use the
+        ws2812b LED strip because it has some advantages.
+        <ol>
+          <li>
+            1. Its addressable, this means that I only needed one DATA PIN on my
+            chip to address enough LEDs and not 1 PIN per LED like older models.
+            This makes it a looot easier.
+          </li>
+          <li>
+            2. There is a library inside the Arduino IDE being the
+            Adafruit.Neopixel. I already used this in Task 3 of my{" "}
+            <Link className=" underline" to="/assignments/six">
+              previous exercise
+            </Link>{" "}
+            for embedded programming and it takes care of the hardware level
+            programming for you.
+          </li>
+          <li>
+            3. They have a good enough color profile and dont take much power.
+          </li>
+        </ol>
+      </div>
+      <h1>3. Design/ Schematic</h1>
+      <div>
+        After finishing up the idea, I first started working on my own board. I
+        followed along the tutorial we created in class and added two interfaces
+        (pinheaders) for my two components. More about this can be read in the
+        last assignment aswell.
+      </div>
+      <h1>4. Milling the Board and Soldering</h1>
+      <div>
+        I already talked about the milling for my final project in{" "}
+        <Link className="underline" to="/assignments/eight">
+          Assignment Eight
+        </Link>
+        . I had no big problems with the soldering process or anything else. I
+        ended up having a ground island which I fixed with a capacitor, which I
+        used to bridge from the GND island to the rest.
+      </div>
+      <h1>5. The Case</h1>
+      <div>
+        My case would consist of three major components. The base plate, which
+        is thin and made out of mdf. the front, which is made out of plexiglass
+        with baking paper and multiple spacers inbetween. The back and front are
+        the exist same component, just different materials. I created this
+        fusion file, where I placed the seven-segments with each LED using the
+        actual measurements to get a hold of the measurements I needed for
+        lasercutting. The final measurements were 41.3cm x 17.6cm. I then
+        created the DXF file for only the sketch of the base and lasercut the
+        base with mdf and front with plexiglass.
+      </div>
+      <img src="/final/base-plate.png"></img>
+      <h1>6. LED Communication</h1>
+      <div>
+        After milling the base plate, I drew support lines on the plate to help
+        me arrange the LEDs properly. Here is a cool picture showing that:
+      </div>
+      <img src="support-lines.jpeg"></img>
+      <div>
+        I used a hot glue gun to fixate the LEDs onto the board and soldered
+        them together. I did this for the first digit and uploaded an example
+        sketch to my chip to test if it works. I connected the LED strip using
+        the GND, 5V and DATA_IN Pins to my board. This video showcases the digit
+        counting up from 0 to 9 in an infite loop.
+      </div>
+      <video controls className="mt-2">
+        <source src="/final/first-digit.mp4" type="video/mp4"></source>
+      </video>
+      <h1>7. WiFi Module</h1>
+      <div>
+        At this point things got really tricky. I connected the wifi module to
+        my board using all the pins necessary and the Power LED blinked. But
+        then noticed a burned smell and figured out something wasn't going
+        right. The module was fried. The datasheet noted that the module needed
+        3.3V, I however applied 5V because I did not realise this. This made
+        things a lot harder. We ordered a new one but I also had to update my
+        setup so I can even provide 3.3V. To do this, we added a 5V to 3.3V
+        step-down voltage regulator (
+        <a className="underline" href="https://www.pololu.com/product/2842">
+          Link
+        </a>
+        ). This component needed GND, V_IN to provide V_OUT and needs to be
+        between the 5V from my chip and the 3x 3.3V needed for my wifi module. I
+        ended up connecting it to one of the 3 VCC pinheaders which were
+        originally intended for the wifi module and cut open two jumper cables
+        to split the V_OUT into 3. This module then worked like a charm and
+        rescued my project. I double checked all the voltages before plugging it
+        into the wifi module again and this time it worked. Now, there was only
+        the second obstacle with the wifi module, which was to program it.
+        Luckily the combination of the datasheet, a youtube video (
+        <a
+          className="underline"
+          href="https://www.youtube.com/watch?v=HyRopfB3aQI"
+        >
+          Link
+        </a>
+        ) and Ahmed helped me to both turn on the programming mode and upload
+        the sketch to the wifi module. The big clue was to connect the GPIO0 PIN
+        to GND on boot and switch the RX/ TX // RXD/ TXD pins. This is what this
+        looked like.
+      </div>
+      <img src="/final/wifi-program.jpeg"></img>
+      <div>
+        The purple/ black cable is GND, this is split into two and connected to
+        the step-down and the wifi module. 5V VCC (red cable) is connected into
+        V_IN of the step-down. V_OUT (white cable) of the step-down is split
+        into three and connected to the wifi module. RXD (blue cable) is
+        connected to RX on the module and TXD (green cable) is connected to TX.
+      </div>
+      <h1>8. The Marriage</h1>
+      <div>
+        Now the time had come to combine everything. The wifi module talking to
+        the chip and the chip talking to the LED strip. This is what my setup
+        for this looked like. I will explain this briefly.
+      </div>
+      <img src="/final/final-setup.jpeg"></img>
+      <div>
+        I used the USB to Serial converter to power my board. the purple cable
+        is GND which is connected to GND on my board. Same goes for the white
+        power cable. I connected the step-down voltage regulator (component that
+        is almost falling off the table) with my board using GND and 5V pins.
+        The 3.3V output are connected to 3 pins on the wifi module. furthermore
+        RXD and RX, aswell as TXD and TX between the wifi module and my board
+        are connected as well as GND. The LED strip is connected to the board
+        using 5V VCC, GND and DATA PIN 2. It was quite the hurdle to switch
+        between programming the wifi module and testing it. I will show the
+        final code for the wifi module and the atmega chip later, as I had many
+        versions. But here is a video showcasing the basic functionality. At
+        this point, the code was bad, which is why there is a big delay between
+        clicking something in the UI and the LED updating. ANother interesting
+        aspect here is the architecture im using right now. The Laptop is
+        connected to my home internet over wifi, same goes for the wifi module.
+        Inside my local network I can access this website from anywhere. I also
+        tested this with a wifi hotspot from my phone, which worked fine aswell.
+      </div>
+      <video controls className="mt-2">
+        <source src="/final/first-color-change.mp4" type="video/mp4"></source>
+      </video>
+      <div>
+        Now I had to do a lot more soldering to get all the 29 LEDs connected...
+      </div>
+      <img src="/final/soldering.png"></img>
+      <div>
+        After I was done with soldering, it was time for another test. This
+        time, I would also retrieve the time over the NtpClient (Network Time
+        Protocol). In this picture, you can see all LEDs working as intended
+        while also displaying the correct time (16:52)
+      </div>
+      <img src="/final/everything-soldered.png"></img>
+      <div>
+        Now there was one thing left: Adding the spacer/ border of the digits/
+        LEDs. The idea was to cut out wooden blocks for this since I have the
+        machines and the materials for this at home. What I cut out ended up
+        looking like this:
+      </div>
+      <img src="/final/space.png"></img>
+      <div>
+        I tested this with one digit and I was quite happy with the results:
+      </div>
+      <img src="first-digit-walls.png"></img>
+      <div>
+        You are easily able to distinct between the segment with the LED on vs.
+        off. I didnt want the blocks to touch the LEDs, which led to me making
+        them a tiny bit smaller, this however already had a huge impact, but I
+        noticed it too late...
+      </div>
+      <h1>9. Final Version</h1>
+      Features:
+      <ol>
+        <li>
+          2. connects to home wifi and hosts a webserver in the local network
+        </li>
+        <li>2. displays the correct time on boot, which syncs every hour</li>
+        <li>3. UI via webserver, with option to change the color</li>
+      </ol>
+      <h2>Color Change</h2>
+      <video controls className="mt-2">
+        <source src="/final/color-change.mp4" type="video/mp4"></source>
+      </video>
+      <h2>Time Change</h2>
+      <video controls className="mt-2">
+        <source src="/final/time-change.mp4" type="video/mp4"></source>
+      </video>
+      <h1>10. Takeaways</h1>
+      Overall, im really happy with how the project turned out. I got all the
+      core features done, which I originally planned to do. I did 2 bigger
+      mistakes, these being:
+      <ol>
+        <li>
+          1. Fried the wifi module: I simply did not know that I had to watch
+          out for the voltage as much. I thought that the chip has 5V and its
+          gonna be fine. I had not even considered this to be a problem
+        </li>
+        <li>
+          2. LED tunnels: I should have done more research about the light
+          behaviour (how much it spreads etc). You can see the segments
+          relatively clear but it could have been way sharper aswell and it
+          would make it look a lot cooler.
+        </li>
+      </ol>
+      <h1>11. Whats coming next?</h1>
+      <div>
+        I really want to use this. Its a cool addition to my room and it makes
+        me proud that I was able to do this all by myself in the course of this
+        class. Its not fully finished yet however, and there are some things
+        that need to be done. First, I need to order a power supply with 5V,
+        which I can connect using the GND and VCC pins. Right now im still using
+        the USB-to-Serial Converter, which is really messy. Furthermore, I would
+        need to secure everything in place proper, this includes: Getting rid of
+        as many jumper cables as possible and instead solder everything
+        together, use a hot glue gun to provide even more stability, and finally
+        fixate the front on top. I could then hang this on a wall and always
+        have a cool, low-energy way to know the time :)
+      </div>
+      <div>
+        At the start I also considered adding data from an API to display any
+        kind of data (that fits into 4 digits)
+      </div>
+      <h1>12. Conclusion</h1>
+      <div>
+        Signing up for this class and trying our best to get it offered, was the
+        best decision. I feel like I really did learn a lot, compared to other
+        modules and it was always fun. It was a ton of work, but I would do it
+        again every time and suggest other people to participate aswell.
+      </div>
+    </div>
+  );
+}
