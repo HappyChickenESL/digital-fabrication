@@ -1,4 +1,6 @@
 import { Link } from "@tanstack/react-router";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export default function FinalProject() {
   return (
@@ -6,15 +8,29 @@ export default function FinalProject() {
       <h1 className="mt-0!">=============================</h1>
       <div className="text-3xl">Final Project</div>
       <h1 className="mt-0!">=============================</h1>
+      <h1 className="mt-0!">==========Downloads==========</h1>
       <div>
-        <a href="/final/digital-fabrication-final-presentation.pdf">
-          Presentation
+        <a
+          href="/final/digital-fabrication-final-presentation.pdf"
+          className="underline text-3xl"
+        >
+          Download Presentation
         </a>
       </div>
+      <a
+        href="/final/poster.png"
+        className="underline text-3xl"
+        download={true}
+      >
+        Download Poster
+      </a>
+      <h1 className="mt-0!">=============================</h1>
       <div>
         In this section I will be talking about my final project, the
         seven-segment display.
       </div>
+      <h1>The Poster</h1>
+      <img src="/final/poster.png"></img>
       <h1>1. The Idea</h1>
       <div>
         The Idea behind the project was a video I had seen some time ago about a
@@ -243,6 +259,250 @@ export default function FinalProject() {
         while also displaying the correct time (16:52)
       </div>
       <img src="/final/everything-soldered.png"></img>
+      <h1>9.The Code</h1>
+      <div>
+        I had to both program the atmega chip and the wifi module. First I will
+        paste the code and then talk about some highlights.
+      </div>
+      <h2>Atmega328p</h2>
+      <SyntaxHighlighter language="cpp" style={vscDarkPlus}>
+        {`
+#include <Adafruit_NeoPixel.h>
+#include <SoftwareSerial.h>
+
+#define PIN 2	 // input pin Neopixel is attached to
+
+#define NUMPIXELS 29 // number of neopixels in strip
+
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+byte digits[10][7] = {
+  {1,1,1,0,1,1,1}, // 0
+  {0,0,1,0,0,0,1}, // 1
+  {0,1,1,1,1,1,0}, // 2
+  {0,1,1,1,0,1,1}, // 3
+  {1,0,1,1,0,0,1}, // 4
+  {1,1,0,1,0,1,1}, // 5
+  {1,1,0,1,1,1,1}, // 6
+  {0,1,1,0,0,0,1}, // 7
+  {1,1,1,1,1,1,1}, // 8
+  {1,1,1,1,0,1,1}  // 9
+};
+
+int red = 0;
+int green = 255;
+int blue = 0;
+
+String command = "";
+
+void setup() {
+  pinMode(3, INPUT);
+  pixels.begin();
+  Serial.begin(115200);
+}
+
+void loop() {
+
+  int current = millis();
+
+  while (Serial.available()) {
+
+    char c = Serial.read();
+    if (c == '\\n') {
+      handleCommand(command);
+      command = "";
+    } else {
+      command += c;
+    }
+  }
+}
+
+void handleCommand(String cmd) {
+  cmd.trim();
+
+  if (cmd.startsWith("TIME:")) {
+    parseTime(cmd.substring(5));
+  }
+  else if (cmd.startsWith("COLOR:")) {
+    parseColor(cmd.substring(6));
+  }
+}
+
+void parseTime(String payload) {
+  pixels.clear();
+  updateDisplay(payload.charAt(0) - '0', 0);
+  updateDisplay(payload.charAt(1) - '0', 7);
+  updateDisplay(payload.charAt(3) - '0', 15);
+  updateDisplay(payload.charAt(4) - '0', 22);
+  pixels.show();
+}
+
+void parseColor(String payload) {
+  int firstComma = payload.indexOf(',');
+  int secondComma = payload.indexOf(',', firstComma + 1);
+
+  if (firstComma == -1 || secondComma == -1) return; // invalid
+
+  red = payload.substring(0, firstComma).toInt();
+  green = payload.substring(firstComma + 1, secondComma).toInt();
+  blue = payload.substring(secondComma + 1).toInt();
+
+  for (int i = 0; i < NUMPIXELS; i++) {
+    uint32_t currentColor = pixels.getPixelColor(i);
+    if (currentColor != 0) {   // 0 means “off”
+      pixels.setPixelColor(i, correctedColor(red, green, blue));
+    }
+  }
+  pixels.show();
+}
+
+uint32_t correctedColor(int r, int g, int b) {
+  return pixels.Color(
+    pixels.gamma8(r),
+    pixels.gamma8(g),
+    pixels.gamma8(b)
+  );
+}
+
+void updateDisplay(int digit, int start) {
+  pixels.setPixelColor(14, pixels.Color(red, green, blue));
+  for (int i=0; i < 7; i++) {
+    if(digits[digit % 10][i] == 1) {
+        pixels.setPixelColor(i + start, pixels.Color(red, green, blue));
+    }
+  }
+}
+          `}
+      </SyntaxHighlighter>
+      <h2>WiFi Module</h2>
+      <SyntaxHighlighter language="cpp" style={vscDarkPlus}>
+        {`
+#include <ESP8266WiFi.h>
+#include <WiFiUdp.h>
+#include <NTPClient.h>
+
+const char* ssid = "FRITZ!Box 5530 QS";
+const char* password = "*";
+
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "pool.ntp.org", 3600, 600000); 
+
+WiFiServer server(80);
+
+int lastMinute = -1;
+
+void setup()
+{
+  Serial.begin(115200);
+  Serial.println();
+
+  Serial.printf("Connecting to %s ", ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println(" connected");
+
+  server.begin();
+  Serial.printf("Web server started, open %s in a web browser\\n", WiFi.localIP().toString().c_str());
+
+  timeClient.begin();
+}
+
+
+// prepare a web page to be send to a client (web browser)
+String prepareHtmlPage()
+{
+  String htmlPage;
+  htmlPage.reserve(1024);               // prevent ram fragmentation
+  htmlPage = F("HTTP/1.1 200 OK\\r\\n"
+               "Content-Type: text/html\\r\\n"
+               "Connection: close\\r\\n"
+               "Refresh: 5\\r\\n"
+               "\\r\\n");
+
+  // Use raw string literal for HTML + JS
+  htmlPage += R"rawliteral(
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>LED Color Picker</title>
+</head>
+<body>
+  <h1>LED Color Picker</h1>
+  <input type="color" id="colorPicker" value="#00FF00">
+  <button onclick="sendColor()">Set Color</button>
+
+  <script>
+    function sendColor() {
+      const color = document.getElementById("colorPicker").value; // "#RRGGBB"
+      const rgb = color.substring(1);
+      const r = parseInt(rgb.substring(0,2), 16);
+      const g = parseInt(rgb.substring(2,4), 16);
+      const b = parseInt(rgb.substring(4,6), 16);
+      fetch(\`/COLOR?r=\${r}&g=\${g}&b=\${b}\`);
+    }
+  </script>
+</body>
+</html>
+)rawliteral";
+  return htmlPage;
+}
+
+
+void loop()
+{
+  WiFiClient client = server.accept();
+  if (client)
+  {
+      if (client.available())
+      {
+        String request = client.readStringUntil('\r');
+        client.flush();
+
+        if (request.indexOf("/COLOR") != -1) {
+          int rIndex = request.indexOf("r=");
+          int gIndex = request.indexOf("g=");
+          int bIndex = request.indexOf("b=");
+          if (rIndex!=-1 && gIndex!=-1 && bIndex!=-1) {
+            int r = request.substring(rIndex+2, gIndex-1).toInt();
+            int g = request.substring(gIndex+2, bIndex-1).toInt();
+            int b = request.substring(bIndex+2).toInt();
+
+            Serial.printf("COLOR:%d,%d,%d\n", r, g, b);
+          }
+        }
+
+        client.println(prepareHtmlPage());
+        client.stop();
+      }
+  }
+
+  timeClient.update();  // fetch current time from NTP server
+
+  // get hours, minutes, seconds
+  int hours = timeClient.getHours();
+  int minutes = timeClient.getMinutes();
+
+  if (lastMinute != minutes) {
+    Serial.printf("TIME:%02d,%02d\n", hours, minutes);
+    lastMinute = minutes;
+  }
+  
+}`}
+      </SyntaxHighlighter>
+      <div>
+        For the communication between the wifi module and the atmega, I
+        implemented a command based communication. There are two commands, as of
+        right now. "TIME:" and "COLOR:". These take certain parameters like the
+        RGB-value or the current hours and minutes. Its easy to expand this
+        command system by adding another command like "TIMER:00,40", which would
+        set a timer for 40 minutes. To reduce unneccessary http requests to the
+        NTP Server, I added a sync time. The current time is synced once every
+        hour and for the rest of the time, the local module time is used.
+      </div>
       <div>
         Now there was one thing left: Adding the spacer/ border of the digits/
         LEDs. The idea was to cut out wooden blocks for this since I have the
@@ -253,14 +513,14 @@ export default function FinalProject() {
       <div>
         I tested this with one digit and I was quite happy with the results:
       </div>
-      <img src="first-digit-walls.png"></img>
+      <img src="/final/first-digit-walls.png"></img>
       <div>
         You are easily able to distinct between the segment with the LED on vs.
         off. I didnt want the blocks to touch the LEDs, which led to me making
         them a tiny bit smaller, this however already had a huge impact, but I
         noticed it too late...
       </div>
-      <h1>9. Final Version</h1>
+      <h1>10. Final Version</h1>
       Features:
       <ol>
         <li>
@@ -277,7 +537,7 @@ export default function FinalProject() {
       <video controls className="mt-2">
         <source src="/final/time-change.mp4" type="video/mp4"></source>
       </video>
-      <h1>10. Takeaways</h1>
+      <h1>11. Takeaways</h1>
       Overall, im really happy with how the project turned out. I got all the
       core features done, which I originally planned to do. I did 2 bigger
       mistakes, these being:
@@ -294,7 +554,7 @@ export default function FinalProject() {
           would make it look a lot cooler.
         </li>
       </ol>
-      <h1>11. Whats coming next?</h1>
+      <h1>12. Whats coming next?</h1>
       <div>
         I really want to use this. Its a cool addition to my room and it makes
         me proud that I was able to do this all by myself in the course of this
@@ -312,7 +572,7 @@ export default function FinalProject() {
         At the start I also considered adding data from an API to display any
         kind of data (that fits into 4 digits)
       </div>
-      <h1>12. Conclusion</h1>
+      <h1>13. Conclusion</h1>
       <div>
         Signing up for this class and trying our best to get it offered, was the
         best decision. I feel like I really did learn a lot, compared to other

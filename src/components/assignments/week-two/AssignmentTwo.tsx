@@ -1,11 +1,14 @@
 export default function AssignmentTwo() {
   return (
     <div>
+      <h1 className="mt-0!">=============================</h1>
+      <div className="text-3xl">Fusion Design</div>
+      <h1 className="mt-0! mb-8">=============================</h1>
       <h1 className="mt-0">=====Fusion Archive File=====</h1>
       <a className="text-3xl" href="/week-two/7-segment-display-colorized.f3d">
         Download Fusion Archive File
       </a>
-      <h1 className="mt-0 mb-8">=============================</h1>
+      <h1 className="mt-0! mb-8">=============================</h1>
       <h1>1. The Case</h1>
       <div>
         I had a rough idea of what I want my final idea to look like. I started

@@ -1,9 +1,9 @@
 export default function AssignmentSeven() {
   return (
     <div className="w-[50vw]">
-      <h1 className="mt-0">=============================</h1>
+      <h1 className="mt-0!">=============================</h1>
       <div className="text-3xl">Printed Circuit Boards</div>
-      <h1 className="mt-0 mb-8">=============================</h1>
+      <h1 className="mt-0! mb-8">=============================</h1>
       <div>
         This exercise consists of two parts. First, we need to mill the board.
         After that, I will be soldering the parts ontop of the board.

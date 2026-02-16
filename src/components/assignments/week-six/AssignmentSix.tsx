@@ -4,9 +4,9 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 export default function AssignmentSix() {
   return (
     <div className="w-[50vw]">
-      <h1 className="mt-0">=============================</h1>
+      <h1 className="mt-0!">=============================</h1>
       <div className="text-3xl">Embedded Programming</div>
-      <h1 className="mt-0 mb-8">=============================</h1>
+      <h1 className="mt-0! mb-8">=============================</h1>
       <h1>Task 1: Debounced Buttons</h1>
       <div className="my-4">
         Link:{" "}

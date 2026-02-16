@@ -1,27 +1,27 @@
 export default function AssignmentEight() {
   return (
     <div className="w-[50vw]">
-      <h1 className="mt-0">=============================</h1>
+      <h1 className="mt-0!">=============================</h1>
       <div className="text-3xl">Electronics Design</div>
-      <h1 className="mt-0 mb-8">=============================</h1>
+      <h1 className="mt-0! mb-8">=============================</h1>
       <h1 className="">=========KiCad Files=========</h1>
       <div className="flex flex-col">
         <a
-          className="text-3xl"
+          className="text-xl"
           href="/week-eight/seven-segment.kicad_sch"
           download={true}
         >
           Download Schematic
         </a>
         <a
-          className="text-3xl"
+          className="text-xl"
           href="/week-eight/seven-segment.kicad_pcb"
           download={true}
         >
           Download PCB Design
         </a>
       </div>
-      <h1 className="mt-0 mb-8">=============================</h1>
+      <h1 className="mt-0! mb-8">=============================</h1>
       <div>
         After producing a board last week, which Ahmed designed already, this
         week is about creating our own design for the final project.

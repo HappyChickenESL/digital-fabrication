@@ -3,6 +3,9 @@ import { Link } from "@tanstack/react-router";
 export default function AssigmentThree() {
   return (
     <div>
+      <h1 className="mt-0!">=============================</h1>
+      <div className="text-3xl">3D-Printing</div>
+      <h1 className="mt-0! mb-8">=============================</h1>
       <h1>Goal of this exercise</h1>
       <div>
         This exercise is about 3d-printing something that either cannot be done
