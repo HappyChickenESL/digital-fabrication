@@ -8,7 +8,7 @@ export default function FinalProject() {
       <h1 className="mt-0!">=============================</h1>
       <div className="text-3xl">Final Project</div>
       <h1 className="mt-0!">=============================</h1>
-      <h1 className="mt-0!">==========Downloads==========</h1>
+      <h1 className="mt-0">==========Downloads==========</h1>
       <div>
         <a
           href="/final/digital-fabrication-final-presentation.pdf"
@@ -24,7 +24,7 @@ export default function FinalProject() {
       >
         Download Poster
       </a>
-      <h1 className="mt-0!">=============================</h1>
+      <h1 className="mt-0! mb-6">=============================</h1>
       <div>
         In this section I will be talking about my final project, the
         seven-segment display.
