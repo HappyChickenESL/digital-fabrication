@@ -167,7 +167,7 @@ export default function FinalProject() {
         After milling the base plate, I drew support lines on the plate to help
         me arrange the LEDs properly. Here is a cool picture showing that:
       </div>
-      <img src="support-lines.jpeg"></img>
+      <img src="/final/support-lines.jpeg"></img>
       <div>
         I used a hot glue gun to fixate the LEDs onto the board and soldered
         them together. I did this for the first digit and uploaded an example
